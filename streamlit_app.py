@@ -64,6 +64,7 @@ for name, model in models.items():
 st.write("### 📊 Сравнение моделей по точности")
 st.table(pd.DataFrame(results))
 
+# Виджеты для selectbox и slider
 st.sidebar.header("🔮 Предсказание по параметрам")
 island_input = st.sidebar.selectbox("Остров", df['island'].unique())
 sex_input = st.sidebar.selectbox("Пол", df['sex'].unique())
@@ -80,6 +81,7 @@ user_input = pd.DataFrame([{ # Обратите внимание на ОДНУ �
     'flipper_length_mm': flipper_length,
     'body_mass_g': body_mass
 }])
+
 user_encoded = encoder.transform(user_input)
 for col in ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']:
     user_encoded[col] = user_input[col].values
