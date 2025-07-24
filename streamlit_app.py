@@ -73,8 +73,8 @@ flipper_length = st.sidebar.slider("Длина крыла (мм)", float(df['fli
 body_mass = st.sidebar.slider("Масса тела (г)", float(df['body_mass_g'].min()), float(df['body_mass_g'].max()), float(df['body_mass_g'].mean()))
 
 user_input = pd.DataFrame([[
-    'island' : island_input,
-    'sex' : sex_input,
+    'island': island_input,
+    'sex': sex_input,
     'bill_length_mm': bill_length,
     'bill_depth_mm': bill_depth,
     'flipper_length_mm': flipper_length,
