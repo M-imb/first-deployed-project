@@ -28,7 +28,7 @@ with col2:
     fig2 = px.scatter(df, x="bill_length_mm", y="flipper_length_mm", color="species", title="Длина клюва vs Длина крыла")
     st.plotly_chart(fig2, use_container_width=True)
 
-х = df.drop(['species'], axis=1)
+Х = df.drop(['species'], axis=1)
 y = df['species']
 Х_train, Х_test, y_train, y_test = train_test_split(Х, y, test_size=0.3, random_state=42)
 
@@ -38,17 +38,19 @@ models = {
 }
 
 results = []
+
+# Обучение и оценка моделей
 for name, model in models.items():
     model.fit(X_train_encoded, y_train)
-
     acc_train = accuracy_score(y_train, model.predict(X_train_encoded))
     acc_test = accuracy_score(y_test, model.predict(X_test_encoded))
-
+    
     results.append({
         'Model': name,
         'Train Accuracy': round(acc_train, 2),
         'Test Accuracy': round(acc_test, 2)
     })
 
+# Вывод результатов
 st.write("### 📊 Сравнение моделей по точности")
 st.table(pd.Dataframe(results))
