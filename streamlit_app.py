@@ -30,9 +30,6 @@ with col2:
 
 Х = df.drop(['species'], axis=1)
 y = df['species']
-
-encoder = ce.TargetEncoder(cols=True)
-X_encoded = encoder.fit_transform(X)
 Х_train, Х_test, y_train, y_test = train_test_split(Х, y, test_size=0.3, random_state=42)
 
 encoder = ce.TargetEncoder(cols=['island', 'sex'])
