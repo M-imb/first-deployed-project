@@ -43,15 +43,15 @@ models = {
 
 results = []
 for name, model in models.items():
-    model.fit(X_train_encoded, y_train)
+    model.fit(X_train_encoded, y_train) # X_train_encoded здесь уже корректен
+
     acc_train = accuracy_score(y_train, model.predict(X_train_encoded))
-    acc_test = accuracy_score(y_test, model.predict(X_test_encoded))    
+    acc_test = accuracy_score(y_test, model.predict(X_test_encoded))     
     results.append({
         'Model': name,
         'Train Accuracy': round(acc_train, 2),
         'Test Accuracy': round(acc_test, 2)
     })
 
-# Вывод результатов
 st.write("### 📊 Сравнение моделей по точности")
-st.table(pd.Dataframe(results))
+st.table(pd.DataFrame(results)) # Исправлено: pd.Dataframe -> pd.DataFrame
