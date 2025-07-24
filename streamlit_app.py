@@ -16,3 +16,14 @@ df = pd.read_csv("https://raw.githubusercontent.com/dataprofessor/data/master/pe
 
 st.subheader("🔍 Случайные 10 строк")
 st.dataframe(df.sample(10), use_container_width=True)
+
+st.subheader("📊 Визуализация данных")
+col1, col2 = st.columns(2)
+
+with col1:
+    fig1 = px.histogram(df, x="species", color="island", barmode="group", title="Распределение видов по островам")
+    st.plotly_chart(fig1, use_container_width=True)
+
+with col2:
+    fig2 = px.scatter(df, x="bill_length_mm", y="flipper_length_mm", color="species", title="Длина клюва vs Длина крыла")
+    st.plotly_chart(fig2, use_container_width=True)
