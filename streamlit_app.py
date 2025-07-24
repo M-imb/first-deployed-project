@@ -30,7 +30,14 @@ with col2:
 
 Х = df.drop(['species'], axis=1)
 y = df['species']
+
+encoder = ce.TargetEncoder(cols=True)
+X_encoded = encoder.fit_transform(X)
 Х_train, Х_test, y_train, y_test = train_test_split(Х, y, test_size=0.3, random_state=42)
+
+encoder = ce.TargetEncoder(cols=['island', 'sex'])
+X_train_encoded = encoder.fit_transform(X_train, y_train)
+X_test_encoded = encoder.transform(X_test)
 
 models = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
@@ -38,8 +45,6 @@ models = {
 }
 
 results = []
-
-# Обучение и оценка моделей
 for name, model in models.items():
     model.fit(X_train_encoded, y_train)
     acc_train = accuracy_score(y_train, model.predict(X_train_encoded))
