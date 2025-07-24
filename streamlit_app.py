@@ -30,7 +30,7 @@ with col2:
 
 x = df.drop(['species'], axis=1)
 y = df['species']
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+Х_train, Х_test, y_train, y_test = train_test_split(Х, y, test_size=0.3, random_state=42)
 
 models = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
