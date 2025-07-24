@@ -28,11 +28,16 @@ with col2:
     fig2 = px.scatter(df, x="bill_length_mm", y="flipper_length_mm", color="species", title="Длина клюва vs Длина крыла")
     st.plotly_chart(fig2, use_container_width=True)
 
-Х = df.drop(['species'], axis=1)
+# ОПРЕДЕЛЕНИЕ ПРИЗНАКОВ И ЦЕЛЕВОЙ ПЕРЕМЕННОЙ - ИСПРАВЛЕН РЕГИСТР БУКВЫ 'X'
+X = df.drop(['species'], axis=1) # Убедитесь, что это АНГЛИЙСКАЯ 'X'
 y = df['species']
-Х_train, Х_test, y_train, y_test = train_test_split(Х, y, test_size=0.3, random_state=42)
+
+# РАЗДЕЛЕНИЕ ДАННЫХ - ИСПРАВЛЕН РЕГИСТР БУКВЫ 'X'
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42) # Убедитесь, что это АНГЛИЙСКАЯ 'X'
 
 encoder = ce.TargetEncoder(cols=['island', 'sex'])
+
+# КОДИРОВАНИЕ КАТЕГОРИАЛЬНЫХ ПРИЗНАКОВ
 X_train_encoded = encoder.fit_transform(X_train, y_train)
 X_test_encoded = encoder.transform(X_test)
 
@@ -43,10 +48,13 @@ models = {
 
 results = []
 for name, model in models.items():
-    model.fit(X_train_encoded, y_train) # X_train_encoded здесь уже корректен
+    # ОБУЧЕНИЕ МОДЕЛИ
+    model.fit(X_train_encoded, y_train)
 
+    # ПРЕДСКАЗАНИЯ И ОЦЕНКА ТОЧНОСТИ
     acc_train = accuracy_score(y_train, model.predict(X_train_encoded))
     acc_test = accuracy_score(y_test, model.predict(X_test_encoded))     
+    
     results.append({
         'Model': name,
         'Train Accuracy': round(acc_train, 2),
